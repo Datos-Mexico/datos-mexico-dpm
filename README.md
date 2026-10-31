@@ -35,9 +35,11 @@ de cumplirse.
 ## Estado
 
 Versión 0.2.1, formalizada el 31 de octubre de 2026. Cuatro sistemas con
-adhesión declarada y ninguno verificado. El pulso está implementado en la API del
-Observatorio y pendiente de su primer despliegue; hasta que reciba reportes, el
-protocolo no enuncia ninguna cifra en público, por regla propia.
+adhesión declarada y ninguno verificado. El pulso está en producción en la API del
+Observatorio ([api.datosmexico.org/dpm/v1/estado](https://api.datosmexico.org/dpm/v1/estado),
+documentación en [api.datosmexico.org/docs](https://api.datosmexico.org/docs), etiqueta `dpm`)
+desde el 31 de octubre de 2026 y evalúa cada minuto. Ningún sistema reporta aún; hasta que
+alguno lo haga, el protocolo no enuncia ninguna cifra en público, por regla propia.
 
 ## Relación con el Observatorio
 

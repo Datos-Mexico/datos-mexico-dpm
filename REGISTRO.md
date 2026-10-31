@@ -17,7 +17,7 @@ sistema, y no aparecen en esta tabla.
 
 | Sistema | Operador | Adhesión | Estado | Datos en clase (DPM · DPS · DPMS) | Modo | Usuarios diarios | Ficha |
 |---|---|---|---|---|---|---|---|
-| Datos México · datosmexico.org y api.datosmexico.org | Observatorio Datos México | 2026-10-31 | declarada | ninguno confirmado · candidato: clima de las 32 capitales, acotado por el reloj de la fuente (*por medir*) | servido | sin conteo aún | [ficha](fichas/datos-mexico.md) |
+| Datos México · datosmexico.org y api.datosmexico.org | Observatorio Datos México | 2026-10-31 | declarada | ninguno confirmado · el clima de las 32 capitales está declarado en el catálogo del pulso (`datos-mexico/clima-capitales`, servido, reloj de la fuente *por medir*), sin resúmenes aún | servido | sin conteo aún | [ficha](fichas/datos-mexico.md) |
 | ReparaCDMX · reparacdmx.com | David Fernando Ávila Díaz | 2026-10-31 | declarada | ninguno confirmado · candidatos: bandeja de mensajes y conversación (WebSocket y consulta cada 15 a 20 s), despacho y ofertas (20 a 30 s), reportes de servicio (60 s); fuentes por evento, regla pendiente en 0.3 (*por medir*) | custodiado | contable desde 2026-06-09; sin reporte al pulso | [ficha](fichas/reparacdmx.md) |
 | INDEPAR · indeparmx.org | David Fernando Ávila Díaz | 2026-10-31 | declarada | ninguno: todos los datos son mensuales o anuales y se regeneran a mano | custodiado | analítica agregada desde 2026-10-06; sin reporte al pulso | [ficha](fichas/indepar.md) |
 | BPM Stream · bpm-stream.com | David Fernando Ávila Díaz | 2026-10-31 | declarada | ninguno: agenda semanal por acción programada; DJs y escena manuales | custodiado | sin mecanismo; el sitio declara no rastrear | [ficha](fichas/bpm-stream.md) |
@@ -31,4 +31,4 @@ sistema, y no aparecen en esta tabla.
 | Datos con clase confirmada por el pulso | 0 |
 | Cifras públicas disponibles (caudal, usuarios DPM diarios) | ninguna hasta que exista el pulso |
 
-Este resumen se actualiza a mano hasta que el pulso lo genere.
+Este resumen se actualiza a mano; la cifra viva está en [api.datosmexico.org/dpm/v1/estado](https://api.datosmexico.org/dpm/v1/estado).
