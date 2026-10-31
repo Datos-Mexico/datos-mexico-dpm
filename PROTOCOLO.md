@@ -7,10 +7,8 @@
 Especificación del protocolo DPM, el régimen bajo el cual un sistema declara,
 mide y presume la frescura de los datos que entrega a las personas.
 
-El protocolo se concibió en anotaciones manuscritas anteriores a este
-repositorio, junto con la idea misma de Datos México. Este documento es su
-primera formalización pública. Es artefacto vivo: se versiona aquí y cada
-cambio queda en `CHANGELOG.md`.
+Este documento es la primera formalización pública del protocolo. Es
+artefacto vivo: se versiona aquí y cada cambio queda en `CHANGELOG.md`.
 
 El protocolo es operativo, no doctrinal. Se rige por el `MANIFESTO.md` y el
 `MODELO.md` del repositorio `Datos-Mexico/observatorio`. Donde este protocolo y

@@ -6,8 +6,7 @@ degradación incrementa la versión menor.
 
 ## 0.1.0 · 2026-10-31
 
-Primera formalización pública del protocolo, concebido en anotaciones
-manuscritas anteriores a este repositorio.
+Primera formalización pública del protocolo.
 
 - Nombre y reserva de siglas: DPM, DPS y DPMS solo para las tres clases; sin
   siglas para cadencias mayores a un minuto.
