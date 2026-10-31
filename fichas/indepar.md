@@ -31,7 +31,7 @@ cadencia en palabras.
 
 ## Reporte al pulso
 
-- **Cómo reporta el sistema cada refresco:** por implementar. Como no hay refresco automático, el lugar natural es el script de despliegue, que reportaría cada regeneración como ingesta con su verificación.
+- **Cómo reporta el sistema cada refresco:** no hay refrescos automáticos. Cada publicación se reporta como ingesta verificada del dato `panorama-sar` desde el ritual de despliegue (PR #328 del repositorio de INDEPAR, pendiente de merge).
 - **Cómo reporta el conteo diario de usuarios:** por implementar. Lugar natural: un cron adicional en los Workers que ya leen la base D1 del sistema.
 
 ## Insignia

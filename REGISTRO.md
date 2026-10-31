@@ -17,10 +17,10 @@ sistema, y no aparecen en esta tabla.
 
 | Sistema | Operador | Adhesión | Estado | Datos en clase (DPM · DPS · DPMS) | Modo | Usuarios diarios | Ficha |
 |---|---|---|---|---|---|---|---|
-| Datos México · datosmexico.org y api.datosmexico.org | Observatorio Datos México | 2026-10-31 | declarada | ninguno confirmado · el clima de las 32 capitales está declarado en el catálogo del pulso (`datos-mexico/clima-capitales`, servido, reloj de la fuente *por medir*), sin resúmenes aún | servido | sin conteo aún | [ficha](fichas/datos-mexico.md) |
+| Datos México · datosmexico.org y api.datosmexico.org | Observatorio Datos México | 2026-10-31 | declarada | ninguno: `clima-capitales` (fuente de 15 min, medida) y `sismos-ssn` (por evento, latencia en medición) reportan cada 5 min y cada minuto y quedan fuera de clase por su fuente | custodiado | sin conteo aún | [ficha](fichas/datos-mexico.md) |
 | ReparaCDMX · reparacdmx.com | David Fernando Ávila Díaz | 2026-10-31 | declarada | ninguno confirmado · candidatos: bandeja de mensajes y conversación (WebSocket y consulta cada 15 a 20 s), despacho y ofertas (20 a 30 s), reportes de servicio (60 s); fuentes por evento (regla en 0.3), REPORTA AL PULSO desde 2026-10-31 (*por medir*) | custodiado | contable desde 2026-06-09; se reporta a diario desde 2026-11-01 | [ficha](fichas/reparacdmx.md) |
-| INDEPAR · indeparmx.org | David Fernando Ávila Díaz | 2026-10-31 | declarada | ninguno: todos los datos son mensuales o anuales y se regeneran a mano | custodiado | analítica agregada desde 2026-10-06; sin reporte al pulso | [ficha](fichas/indepar.md) |
-| BPM Stream · bpm-stream.com | David Fernando Ávila Díaz | 2026-10-31 | declarada | ninguno: agenda semanal por acción programada; DJs y escena manuales | custodiado | sin mecanismo; el sitio declara no rastrear | [ficha](fichas/bpm-stream.md) |
+| INDEPAR · indeparmx.org | David Fernando Ávila Díaz | 2026-10-31 | declarada | ninguno: todos los datos son mensuales o anuales y se regeneran a mano; cada publicación se reporta como ingesta (PR #328) | custodiado | analítica agregada desde 2026-10-06; sin reporte al pulso | [ficha](fichas/indepar.md) |
+| BPM Stream · bpm-stream.com | David Fernando Ávila Díaz | 2026-10-31 | declarada | ninguno: agenda semanal por acción programada (cada corrida buena se reporta como ingesta desde el 31-oct); DJs y escena manuales | custodiado | sin mecanismo; el sitio declara no rastrear | [ficha](fichas/bpm-stream.md) |
 
 ## Resumen
 

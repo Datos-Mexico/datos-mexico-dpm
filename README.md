@@ -29,6 +29,7 @@ de cumplirse.
   en clase.
 - **[Fichas](fichas/)** — una ficha por sistema adherido.
 - **[Plantillas](plantillas/)** — la ficha de adhesión para un sistema nuevo.
+- **[¿Tiene México un dato por segundo?](docs/fuentes-por-minuto.md)** — investigación abierta: lo medido y lo pendiente.
 - **[Changelog](CHANGELOG.md)** — todas las versiones del protocolo, con fecha
   y motivo.
 

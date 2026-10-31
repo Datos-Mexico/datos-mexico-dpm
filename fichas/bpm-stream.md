@@ -32,7 +32,7 @@ datos quedan fuera de clase y se registran aquí con su cadencia en palabras.
 
 ## Reporte al pulso
 
-- **Cómo reporta el sistema cada refresco:** por implementar. Lugar natural: el script de la corrida semanal de la agenda, en el paso que ya registra el estado de cada corrida, reportando como ingesta con su verificación.
+- **Cómo reporta el sistema cada refresco:** cada corrida buena de la agenda semanal se reporta como ingesta verificada del dato `agenda-eventos` (en producción desde el 31-oct-2026; primera constancia: 5,674 fechas, 2,716 confirmadas, corrida del 20-oct).
 - **Cómo reporta el conteo diario de usuarios:** por decidir. Requiere un mecanismo nuevo sin cookies, compatible con la política publicada, por ejemplo analítica agregada del proveedor de alojamiento.
 
 ## Insignia
