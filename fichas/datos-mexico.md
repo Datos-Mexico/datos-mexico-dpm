@@ -13,7 +13,7 @@
 
 | Dato | Fuente | Reloj de la fuente | Reloj del refresco | Última verificación | Modo (servido · custodiado) | Clase |
 |---|---|---|---|---|---|---|
-| Clima actual de las 32 capitales estatales | Open-Meteo | por medir | al cargar la página | sin verificación: dato servido | servido | por medir |
+| Clima actual de las 32 capitales estatales (`clima-capitales`, declarado en el pulso el 2026-10-31) | Open-Meteo | por medir (declarado `null` en el pulso: fuera de clase hasta medirlo) | al cargar la página | sin verificación: dato servido | servido | por medir |
 | Series, cubos y tabulados del INEGI, CONSAR, ANUIES y demás fuentes custodiadas | fuente oficial de cada conjunto | mensual, trimestral o anual según el conjunto | manual, sin refresco automático | registrada por conjunto en la bitácora de la API | custodiado | fuera de clase |
 
 ## Usuarios
@@ -23,12 +23,12 @@
 
 ## Reporte al pulso
 
-- **Cómo reporta el sistema cada refresco:** por implementar conforme a `PULSO.md`; el pulso vive en la propia API del Observatorio
+- **Cómo reporta el sistema cada refresco:** el pulso vive en la propia API del Observatorio y está en producción; el reporte de resúmenes del clima está por implementar en el sitio
 - **Cómo reporta el conteo diario de usuarios:** por implementar
 
 ## Insignia
 
-- **Dónde muestra el sistema la insignia del protocolo:** pie de datosmexico.org y página del protocolo; por implementar
+- **Dónde muestra el sistema la insignia del protocolo:** pie de datosmexico.org y página del protocolo; por implementar. Insignia viva: `https://api.datosmexico.org/dpm/v1/insignia/datos-mexico.svg`
 
 ## Compromisos del operador
 
