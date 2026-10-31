@@ -1,6 +1,6 @@
 # El pulso · especificación técnica
 
-**Protocolo DPM 0.2.0 · 31 de octubre de 2026**
+**Protocolo DPM 0.2.1 · 31 de octubre de 2026**
 
 ## 0. Qué es el pulso
 
@@ -38,10 +38,11 @@ versión del protocolo.
 ## 2. Identidad y llaves
 
 Cada sistema adherido tiene un **identificador** (`sistema`, slug en minúsculas
-con guiones, el mismo de su ficha en `fichas/`) y una **llave de reporte**. La
-llave se entrega al operador al registrar la ficha y autoriza a reportar
-únicamente sobre su propio sistema. Se envía en la cabecera
-`Authorization: Bearer <llave>`.
+con guiones, de 2 a 63 caracteres, el mismo de su ficha en `fichas/`) y una
+**llave de reporte** con la forma `dpm_<sistema>_<48 caracteres hexadecimales>`.
+La llave la emite un administrador del Observatorio, se muestra una sola vez y
+el pulso conserva únicamente su hash. Autoriza a reportar únicamente sobre su
+propio sistema. Se envía en la cabecera `Authorization: Bearer <llave>`.
 
 Cada dato tiene un identificador (`dato`, slug) único dentro de su sistema.
 
@@ -177,7 +178,7 @@ custodiado.
 
 | Campo | Regla |
 |---|---|
-| `fecha` | Día civil en la zona `America/Mexico_City`, formato `AAAA-MM-DD`. |
+| `fecha` | Día civil en la zona `America/Mexico_City`, formato `AAAA-MM-DD`. Solo días completos: no se acepta el día en curso ni fechas futuras. |
 | `usuarios_distintos` | Personas distintas que ese día recibieron al menos un dato de los listados en `datos`. Es un conteo, no una lista. |
 | `metodo` | Texto corto con el mecanismo de conteo. Se publica tal cual. |
 | `datos` | Identificadores de los datos que esas personas recibieron. |
@@ -189,8 +190,13 @@ reemplaza si llega dentro de los 7 días siguientes; después, se rechaza.
 
 ## 7. Cálculo de la clase
 
-El pulso evalúa la clase de cada dato **una vez por minuto**, al cierre de cada
-minuto `T`, y solo sobre resúmenes puntuales.
+El pulso evalúa la clase de cada dato **una vez por minuto** y solo sobre
+resúmenes puntuales. El minuto evaluado es `T = minuto en curso − 5 minutos`:
+al cerrar el plazo de puntualidad de `T − 1` ya llegó todo lo que puede contar
+para la ventana que termina en `T`, y lo que llegue después es tardío y no
+reescribe la clase (§1.3). La clase publicada lleva, por tanto, cinco minutos
+de retraso respecto del reloj, y ese retraso es el precio de no corregirla
+nunca hacia atrás.
 
 1. **Ventana.** Los 60 minutos que terminan en `T`.
 2. **Cobertura.** Si el dato no tiene ningún resumen puntual anterior al inicio
@@ -213,7 +219,8 @@ minuto `T`, y solo sobre resúmenes puntuales.
    clase.
 6. **Historial.** Si la clase resultante difiere de la vigente, el pulso
    escribe un cambio en el historial del dato con el instante `T`. El historial
-   es público y no se edita.
+   es público y no se edita. Si por una evaluación a demanda dos cálculos caen
+   en el mismo `T`, el historial conserva el veredicto final de ese `T`.
 
 La clase es estricta, sin tolerancia, tal como la fija `PROTOCOLO.md` §5.
 
@@ -239,8 +246,10 @@ con la leyenda «sumados por sistema».
 
 **Estado de adhesión.** Un sistema pasa a **verificada** cuando el pulso ha
 recibido al menos un resumen puntual suyo en cada uno de los últimos 7 días
-civiles. Vuelve a **declarada** cuando pasa 7 días sin reportar. El cambio de
-estado queda en el historial del sistema.
+civiles completos (America/Mexico_City). Vuelve a **declarada** cuando pasan 7
+días civiles completos sin ninguno. Entre ambos extremos el estado no cambia.
+El pulso evalúa el estado una vez por hora. El cambio de estado queda en el
+historial del sistema.
 
 ---
 
@@ -296,7 +305,8 @@ compacta.
 | Resumen con `minuto` futuro, o de más de 24 horas | `422` |
 | `primero` o `ultimo` fuera de su `minuto`, o `ultimo` anterior a `primero` | `422` |
 | Más de 1,000 resúmenes en un envío | `413` |
-| Reporte de usuarios de una fecha futura o de más de 7 días | `422` |
+| Reporte de usuarios del día en curso, de una fecha futura o de más de 7 días | `422` |
+| Ingesta sobre un dato servido | `422` |
 
 Un rechazo no se reintenta modificando el hecho. Si el hecho está mal
 registrado en el sistema, el sistema corrige su registro hacia adelante.

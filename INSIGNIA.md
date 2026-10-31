@@ -1,6 +1,6 @@
 # La insignia
 
-**Protocolo DPM 0.2.0 · 31 de octubre de 2026**
+**Protocolo DPM 0.2.1 · 31 de octubre de 2026**
 
 ## Qué es
 
