@@ -13,7 +13,8 @@
 
 | Dato | Fuente | Reloj de la fuente | Reloj del refresco | Última verificación | Modo (servido · custodiado) | Clase |
 |---|---|---|---|---|---|---|
-| Clima actual de las 32 capitales estatales (`clima-capitales`, declarado en el pulso el 2026-10-31) | Open-Meteo | por medir (declarado `null` en el pulso: fuera de clase hasta medirlo) | al cargar la página | sin verificación: dato servido | servido | por medir |
+| Clima actual de las 32 capitales estatales (`clima-capitales`) | Open-Meteo | cada 15 minutos (medido: la fuente declara `interval = 900` en cada respuesta) | cada 5 minutos, desde la API del observatorio, un pedido para las 32 capitales | en cada refresco: 32 de 32 respuestas, coordenadas que coinciden, observación fechada en la última hora | custodiado (`api.datosmexico.org/api/v1/clima/actual`); el pronóstico de 16 días que muestra la portada sigue servido desde Open-Meteo | fuera de clase por la cota de la fuente (la fija el pulso) |
+| Sismos recientes del SSN (`sismos-ssn`) | Servicio Sismológico Nacional, UNAM (canal RSS) | por evento; latencia de publicación en medición desde el 2026-10-31 (sonda por minuto) | cada minuto, lectura del canal | cada lectura correcta; sismos con origen, lugar y profundidad tal como los publica el SSN | custodiado (`api.datosmexico.org/api/v1/sismos/recientes`) | fuera de clase hasta declarar la latencia medida |
 | Series, cubos y tabulados del INEGI, CONSAR, ANUIES y demás fuentes custodiadas | fuente oficial de cada conjunto | mensual, trimestral o anual según el conjunto | manual, sin refresco automático | registrada por conjunto en la bitácora de la API | custodiado | fuera de clase |
 
 ## Usuarios
@@ -23,7 +24,7 @@
 
 ## Reporte al pulso
 
-- **Cómo reporta el sistema cada refresco:** el pulso vive en la propia API del Observatorio y está en producción; el reporte de resúmenes del clima está por implementar en el sitio
+- **Cómo reporta el sistema cada refresco:** la propia API del observatorio reporta por HTTP con su llave, como cualquier sistema adherido: un resumen por refresco del clima (cada 5 minutos) y por lectura de sismos (cada minuto), con el catálogo redeclarado cada hora. Direcciones de comprobación: `/api/v1/clima/comprobacion` y `/api/v1/sismos/comprobacion`
 - **Cómo reporta el conteo diario de usuarios:** por implementar
 
 ## Insignia

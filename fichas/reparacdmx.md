@@ -40,8 +40,8 @@ de latencias está por implementar y hasta entonces la columna «Clase» dice
 
 ## Reporte al pulso
 
-- **Cómo reporta el sistema cada refresco:** por implementar. Lugar natural: el manejador programado del Worker del webhook y el manejador de entrada del webhook.
-- **Cómo reporta el conteo diario de usuarios:** por implementar. Lugar natural: el cron diario ya existente de la API de la app.
+- **Cómo reporta el sistema cada refresco:** en producción desde el 31-oct-2026: la consola y la app suman cada consulta a una cubeta por minuto; el cron del webhook la manda al pulso cada minuto, junto con los eventos (mensajes entrantes y su latencia) y las respuestas al cliente por vía de entrega. Dirección pública de comprobación: `reparacdmx.com/dpm/comprobacion/<dato>` (primera ronda, 23:50 UTC: coincide).
+- **Cómo reporta el conteo diario de usuarios:** a diario desde el 1-nov-2026 (agentes, técnicos, usuarios de la app y clientes que recibieron respuesta, por huella SHA-256).
 
 ## Insignia
 
