@@ -4,6 +4,34 @@ Todas las versiones del protocolo, con fecha y motivo. Versionado semántico;
 hasta la 1.0, cualquier cambio en definiciones, umbrales o reglas de
 degradación incrementa la versión menor.
 
+## 0.2.0 · 2026-10-31
+
+El pulso y la insignia.
+
+- `PULSO.md`: especificación técnica del pulso bajo `api.datosmexico.org/dpm/v1/`.
+  Catálogo de datos con cota de la fuente declarada; resumen por minuto como
+  unidad de reporte (refrescos, primero, último, peor intervalo,
+  observaciones); reportes de ingestas con verificación y de usuarios por día;
+  cálculo de clase al cierre de cada minuto sobre ventana de 60 minutos con
+  requisito de cobertura, solo con resúmenes puntuales (recibidos dentro de 5
+  minutos) y sin reescritura hacia atrás; cálculo de los dos caudales con sus
+  ventanas (24 horas y 30 días) y de usuarios DPM diarios del último día
+  completo; lecturas públicas; modelo de datos; rechazos.
+- `INSIGNIA.md`: la insignia es viva y la sirve el pulso; muestra estado de
+  adhesión y, en su caso, la clase más fina vigente; nunca una cadencia mayor a
+  un minuto.
+- `PROTOCOLO.md` §7 y §8 remiten a los nuevos documentos; la adhesión
+  verificada se define por siete días de reportes puntuales y se pierde tras
+  siete días de silencio.
+- Registro: las cuatro fichas se completan a partir de los repositorios de
+  cada sistema, con nombres públicos corregidos (ReparaCDMX, BPM Stream).
+  Resultado honesto: solo ReparaCDMX tiene datos que se refrescan en cadencia
+  de minutos; INDEPAR y BPM Stream quedan enteramente fuera de clase.
+
+Pendiente para 0.3.0: regla de cota de la fuente para fuentes por evento
+(mensajes, citas, lecturas de sensores), donde el reloj de la fuente no es un
+periodo sino una latencia de entrega.
+
 ## 0.1.0 · 2026-10-31
 
 Primera formalización pública del protocolo.
@@ -23,6 +51,3 @@ Primera formalización pública del protocolo.
 - Adhesión en dos estados, declarada y verificada; cinco condiciones.
 - Registro inicial con cuatro sistemas en adhesión declarada: Datos México,
   Repara, INDEPAR y bpm stream. Cero verificados, cero cifras públicas.
-
-Pendiente para 0.2.0: especificación técnica del pulso (endpoint, formato de
-reporte, cálculo de clase) e insignia oficial.

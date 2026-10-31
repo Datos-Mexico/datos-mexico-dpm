@@ -5,7 +5,7 @@
 - **Nombre del sistema:** Datos México
 - **Operador:** Observatorio Datos México
 - **Dirección pública:** https://datosmexico.org · https://api.datosmexico.org
-- **Qué entrega a las personas:** por declarar
+- **Qué entrega a las personas:** observatorio académico de datos públicos mexicanos: series, cubos, tabulados y microdatos del INEGI, CONSAR y otras fuentes oficiales, por sitio y por API pública, con verificación al peso contra la fuente.
 - **Fecha de adhesión declarada:** 2026-10-31
 - **Fecha de adhesión verificada:** por verificar
 
@@ -18,22 +18,22 @@
 
 ## Usuarios
 
-- **Cómo cuenta el sistema a sus usuarios distintos por día:** por declarar
+- **Cómo cuenta el sistema a sus usuarios distintos por día:** por declarar (el sitio y la API no reportan hoy un conteo de usuarios distintos por día)
 - **Desde cuándo existe ese conteo:** por declarar
 
 ## Reporte al pulso
 
-- **Cómo reporta el sistema cada refresco:** por declarar (versión 0.2)
-- **Cómo reporta el conteo diario de usuarios:** por declarar (versión 0.2)
+- **Cómo reporta el sistema cada refresco:** por implementar conforme a `PULSO.md`; el pulso vive en la propia API del Observatorio
+- **Cómo reporta el conteo diario de usuarios:** por implementar
 
 ## Insignia
 
-- **Dónde muestra el sistema la insignia del protocolo:** por declarar
+- **Dónde muestra el sistema la insignia del protocolo:** pie de datosmexico.org y página del protocolo; por implementar
 
 ## Compromisos del operador
 
 - [x] declara los tres relojes en cada dato que muestra o sirve (pendiente de implementar donde aún no se muestran);
-- [x] reportará al pulso cuando la versión 0.2 lo especifique;
+- [x] reportará al pulso conforme a `PULSO.md`;
 - [x] acepta que la clase la fija el reloj y no el operador;
 - [x] no presume ninguna cadencia mayor a un minuto con sigla ni insignia;
 - [x] no enuncia en público cifras del protocolo que el pulso no haya producido.

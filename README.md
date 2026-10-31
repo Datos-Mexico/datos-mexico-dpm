@@ -2,7 +2,7 @@
 
 [![Sitio: datosmexico.org](https://img.shields.io/badge/sitio-datosmexico.org-111111)](https://datosmexico.org)
 [![Licencia: CC BY 4.0](https://img.shields.io/badge/licencia-CC%20BY%204.0-lightgrey)](LICENSE)
-[![Protocolo: 0.1.0](https://img.shields.io/badge/protocolo-0.1.0-blue)](CHANGELOG.md)
+[![Protocolo: 0.1.0](https://img.shields.io/badge/protocolo-0.2.0-blue)](CHANGELOG.md)
 [![Sistemas adheridos: 4 declarados · 0 verificados](https://img.shields.io/badge/sistemas%20adheridos-4%20declarados%20%C2%B7%200%20verificados-lightgrey)](REGISTRO.md)
 
 Sede del **Protocolo DPM · Datos Por Minuto** del Observatorio Datos México:
@@ -22,6 +22,9 @@ de cumplirse.
 - **[Protocolo](PROTOCOLO.md)** — la especificación: nombre y siglas, los tres
   relojes, clases, degradación automática, dato servido y custodiado, métricas
   públicas y pulso, adhesión.
+- **[Pulso](PULSO.md)** — la especificación técnica: catálogo, resumen por
+  minuto, ingestas, usuarios, cálculo de clase y de métricas, lecturas públicas.
+- **[Insignia](INSIGNIA.md)** — la insignia viva que sirve el pulso.
 - **[Registro](REGISTRO.md)** — los sistemas adheridos, su estado y sus datos
   en clase.
 - **[Fichas](fichas/)** — una ficha por sistema adherido.
@@ -31,10 +34,10 @@ de cumplirse.
 
 ## Estado
 
-Versión 0.1.0, formalizada el 31 de octubre de 2026. Cuatro sistemas con
-adhesión declarada y ninguno verificado: el pulso, el mecanismo que recibe los
-reportes de refresco y calcula las clases, corresponde a la versión 0.2. Hasta
-entonces el protocolo no enuncia ninguna cifra en público, por regla propia.
+Versión 0.2.0, formalizada el 31 de octubre de 2026. Cuatro sistemas con
+adhesión declarada y ninguno verificado. El pulso está especificado y aún no
+implementado; hasta que reciba reportes, el protocolo no enuncia ninguna cifra
+en público, por regla propia.
 
 ## Relación con el Observatorio
 
