@@ -23,6 +23,14 @@ El pulso y la insignia.
 - `PROTOCOLO.md` §7 y §8 remiten a los nuevos documentos; la adhesión
   verificada se define por siete días de reportes puntuales y se pierde tras
   siete días de silencio.
+- Registro: las cuatro fichas se completan a partir de los repositorios de
+  cada sistema, con nombres públicos corregidos (ReparaCDMX, BPM Stream).
+  Resultado honesto: solo ReparaCDMX tiene datos que se refrescan en cadencia
+  de minutos; INDEPAR y BPM Stream quedan enteramente fuera de clase.
+
+Pendiente para 0.3.0: regla de cota de la fuente para fuentes por evento
+(mensajes, citas, lecturas de sensores), donde el reloj de la fuente no es un
+periodo sino una latencia de entrega.
 
 ## 0.1.0 · 2026-10-31
 
