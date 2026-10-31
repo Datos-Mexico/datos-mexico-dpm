@@ -4,6 +4,24 @@ Todas las versiones del protocolo, con fecha y motivo. Versionado semántico;
 hasta la 1.0, cualquier cambio en definiciones, umbrales o reglas de
 degradación incrementa la versión menor.
 
+## 0.4.0 · 2026-10-31
+
+Comprobación: qué pasa si un sistema miente. Motivo: el pulso juzgaba solo
+con lo que cada sistema reportaba.
+
+- `PROTOCOLO.md` §8 bis: todo dato que aspire a clase declara una dirección
+  pública de comprobación que dice cuándo fue su último refresco y cuántos
+  hubo en la última hora; el pulso la consulta por su cuenta cada diez minutos
+  y publica si coincide con lo reportado. Tres fallas seguidas sacan al dato de
+  clase; sin dirección no hay clase. El observatorio puede además auditar a
+  cualquier sistema adherido y publicar el resultado; negarse cuesta la
+  adhesión verificada. Se dice con claridad lo que la comprobación no prueba.
+- `PULSO.md` §3 (`url_comprobacion`), §7 bis (cálculo), §9 (lectura del
+  historial de comprobaciones), §10 (tabla).
+- Transición: los datos ya declarados sin dirección de comprobación quedan
+  fuera de clase desde que el pulso implemente la 0.4; cada operador la
+  agrega cuando pueda.
+
 ## 0.3.0 · 2026-10-31
 
 Fuentes por evento y vía de entrega. Motivo: el primer sistema que reporta

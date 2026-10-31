@@ -1,6 +1,6 @@
 # Protocolo DPM · Datos Por Minuto
 
-**Versión 0.3.0 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
+**Versión 0.4.0 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
 
 ## 0. Qué es este documento
 
@@ -230,6 +230,47 @@ La adhesión tiene dos estados:
   en cada uno de los últimos siete días y sus clases se calculan por reloj.
   Solo los sistemas verificados aportan al caudal y a los usuarios DPM diarios.
   Un sistema que pasa siete días sin reportar vuelve a adhesión declarada.
+
+---
+
+## 8 bis. Comprobación: qué pasa si un sistema miente
+
+El pulso juzga con lo que cada sistema reporta. Un sistema podría reportar
+refrescos que no hizo. El protocolo no lo impide con fe: lo hace costoso de
+sostener y visible cuando ocurre.
+
+**Comprobación de cara pública.** Todo dato en clase, o que aspire a ella,
+declara una **dirección pública de comprobación**: una URL abierta, sin llave,
+que responde en todo momento cuándo fue el último refresco de ese dato y
+cuántos refrescos hubo en la última hora. El pulso la consulta por su cuenta
+desde el observatorio, cada diez minutos, guarda lo que vio con el instante en
+que lo vio y lo compara con lo que el sistema reportó:
+
+- **Coincide** cuando el último refresco publicado y el último reportado
+  distan menos de cinco minutos, y los refrescos de la última hora publicados
+  y reportados no difieren en más de un veinte por ciento.
+- **No coincide** cuando cualquiera de las dos cosas falla.
+- **Sin respuesta** cuando la dirección no contesta o contesta mal.
+- **Sin comprobación** cuando el dato no declaró dirección.
+
+El resultado es público en la ficha del dato, con su historial. Tres
+comprobaciones seguidas en «no coincide» o «sin respuesta» sacan al dato de
+clase hasta que vuelva a coincidir; la etiqueta se cae también por esto. Un
+dato **sin comprobación** no puede estar en clase: puede reportar, puede
+mostrar sus relojes, pero la clase exige una cara pública que diga lo mismo.
+
+**Auditoría del observatorio.** Además de la comprobación automática, el
+observatorio puede auditar cualquier sistema adherido: pedirle acceso de solo
+lectura a sus registros, cotejar una muestra de minutos reportados contra sus
+registros internos, y publicar el resultado en la ficha del sistema dentro del
+registro, con fecha y método. Un sistema que niegue la auditoría pierde la
+adhesión verificada y vuelve a declarada.
+
+**Lo que la comprobación no prueba.** No prueba que el dato sea correcto, ni
+que la persona lo haya recibido: prueba que la cara pública del sistema cuenta
+lo mismo que su reporte, medido por un tercero que no controla el sistema. Es
+una garantía de consistencia, no de verdad. La verdad del dato la gobiernan la
+verificación (§3) y las reglas del observatorio.
 
 ---
 

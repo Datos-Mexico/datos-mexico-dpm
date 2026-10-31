@@ -1,6 +1,6 @@
 # El pulso · especificación técnica
 
-**Protocolo DPM 0.3.0 · 31 de octubre de 2026**
+**Protocolo DPM 0.4.0 · 31 de octubre de 2026**
 
 ## 0. Qué es el pulso
 
@@ -90,6 +90,7 @@ Para una fuente por evento entregada a la persona en cuanto ocurre:
 | `reloj_fuente_ms` | entero o `null` | Solo para fuentes por calendario: periodo con el que la fuente publica observaciones nuevas, en milisegundos. Es la **cota de la fuente** (`PROTOCOLO.md` §4). Si es `null`, el dato no puede recibir clase. |
 | `latencia_fuente_ms` | entero o `null` | Solo para fuentes por evento: latencia de entrega declarada entre el evento en la fuente y el sistema. Es la cota cuando la ventana no tiene eventos; el pulso la corrige al alza cuando observa una mayor (§7). Si es `null`, el dato no puede recibir clase. |
 | `via` | `consulta` · `entrega` | `PROTOCOLO.md` §6. Por omisión, `consulta`. |
+| `url_comprobacion` | URL https o `null` | `PROTOCOLO.md` §8 bis. Dirección pública, sin llave, que responde `{ "ultimo_refresco": <instante ISO UTC>, "refrescos_ultima_hora": <entero> }` para este dato. Sin ella el dato no puede estar en clase. |
 | `modo` | `servido` · `custodiado` | `PROTOCOLO.md` §6. |
 | `ultima_verificacion` | instante ISO 8601 UTC o `null` | Reloj de la verificación. Obligatorio distinto de `null` para datos custodiados que quieran contar en el caudal. |
 
@@ -265,6 +266,33 @@ La clase es estricta, sin tolerancia, tal como la fija `PROTOCOLO.md` §5.
 
 ---
 
+## 7 bis. Comprobación de cara pública
+
+Cada diez minutos, para cada dato con `url_comprobacion`, el pulso hace un
+`GET` a esa dirección desde el observatorio, con un plazo de diez segundos, y
+guarda el resultado con el instante de la consulta:
+
+1. Lee `ultimo_refresco` y `refrescos_ultima_hora` de la respuesta.
+2. Toma el último `ultimo` reportado por el sistema para ese dato y la suma
+   de `refrescos` de los resúmenes de los últimos sesenta minutos.
+3. **Coincide** si `|ultimo_refresco − ultimo reportado| ≤ 300 s` y
+   `|refrescos_ultima_hora − refrescos reportados| ≤ 20 %` del mayor de los
+   dos (con un margen absoluto de dos refrescos para horas con pocos).
+4. **No coincide** si falla cualquiera de las dos condiciones. **Sin
+   respuesta** si la dirección no responde en plazo, no es JSON o le faltan
+   los campos.
+5. El resultado entra al historial del dato. Si las últimas tres
+   comprobaciones son «no coincide» o «sin respuesta», la evaluación de clase
+   (§7) fija **fuera de clase** con nota, hasta que una comprobación vuelva a
+   coincidir.
+6. Un dato sin `url_comprobacion` queda **fuera de clase** por construcción
+   desde la versión 0.4, aunque sus relojes estén en regla; la ficha lo dice.
+
+La dirección de comprobación de un dato por vía de entrega responde con el
+instante de la última entrega y las entregas de la última hora.
+
+---
+
 ## 8. Cálculo de las métricas públicas
 
 **Caudal de refresco.** Suma de `observaciones` de los resúmenes de datos
@@ -302,6 +330,7 @@ Todas las lecturas son públicas, en JSON, con caché de 60 segundos.
 | `GET /dpm/v1/sistemas/{sistema}` | Ficha legible por máquina, estado de adhesión e historial de estados. |
 | `GET /dpm/v1/datos/{sistema}/{dato}` | Catálogo vigente, clase vigente, `W` de la última evaluación y los tres relojes. |
 | `GET /dpm/v1/datos/{sistema}/{dato}/historial` | Cambios de clase, con instante. |
+| `GET /dpm/v1/datos/{sistema}/{dato}/comprobaciones` | Historial de comprobaciones de cara pública: instante, resultado y lo que se leyó. |
 | `GET /dpm/v1/usuarios?desde=&hasta=` | Usuarios DPM diarios por fecha y por sistema. |
 | `GET /dpm/v1/insignia/{sistema}.svg` | La insignia viva del sistema (`INSIGNIA.md`). |
 
@@ -325,6 +354,7 @@ minuto. Tablas:
 | `ingestas` | `sistema, dato, inicio` | ingestas (§5). |
 | `usuarios_dia` | `sistema, fecha` | reporte de usuarios (§6). |
 | `clases` | `sistema, dato, desde` | historial de clases (§7). |
+| `comprobaciones` | `sistema, dato, instante` | comprobaciones de cara pública (§7 bis). |
 | `estados` | `sistema, desde` | historial de estados de adhesión (§8). |
 
 Volumen: un dato en clase genera 1,440 filas de `resumenes` al día. Diez datos
