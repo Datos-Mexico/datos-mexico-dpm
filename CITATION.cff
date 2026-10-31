@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "Si citas el Protocolo DPM, por favor usa el siguiente formato e indica la versión del protocolo que consultaste (ver CHANGELOG.md)."
+title: "Protocolo DPM · Datos Por Minuto"
+abstract: >-
+  Protocolo del Observatorio Datos México para declarar, medir y presumir la
+  frescura de los datos que un sistema entrega a las personas. Define los tres
+  relojes de cada dato (fuente, refresco, verificación), las clases DPM, DPS y
+  DPMS por periodo observado entre refrescos, la degradación automática de la
+  clase, los modos servido y custodiado, las dos métricas públicas producidas
+  por el pulso y el registro de sistemas adheridos.
+authors:
+  - name: "Observatorio Datos México"
+    website: "https://datosmexico.org"
+version: 0.1.0
+date-released: 2026-10-31
+url: "https://datosmexico.org"
+repository-code: "https://github.com/Datos-Mexico/datos-mexico-dpm"
+license: CC-BY-4.0
+type: dataset
+keywords:
+  - datos públicos
+  - México
+  - frescura de datos
+  - cadencia
+  - datos por minuto
+  - observatorio académico
