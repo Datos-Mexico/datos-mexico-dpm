@@ -46,7 +46,7 @@ de latencias está por implementar y hasta entonces la columna «Clase» dice
 ## Insignia
 
 - **Insignia viva:** `https://api.datosmexico.org/dpm/v1/insignia/reparacdmx.svg`
-- **Dónde muestra el sistema la insignia del protocolo:** pie del sitio público; pantalla «Cuenta» de la app de clientes junto al aviso de privacidad; pantalla «Perfil» de la app de técnicos. Por implementar.
+- **Dónde muestra el sistema la insignia del protocolo:** pie de reparacdmx.com (EN PRODUCCIÓN desde el 31-oct-2026, enlaza a datosmexico.org/dpm). Pendiente: pantalla «Cuenta» de la app de clientes y «Perfil» de la app de técnicos.
 
 ## Compromisos del operador
 

@@ -37,7 +37,7 @@ cadencia en palabras.
 ## Insignia
 
 - **Insignia viva:** `https://api.datosmexico.org/dpm/v1/insignia/indepar.svg`
-- **Dónde muestra el sistema la insignia del protocolo:** pie común del sitio; alternativas: la página de estándares, la página de datos o el bloque de datos oficiales de cada calculadora. Por implementar.
+- **Dónde muestra el sistema la insignia del protocolo:** pie común de indeparmx.org (PR #326 del repositorio de INDEPAR, pendiente del merge y despliegue del operador; enlaza a datosmexico.org/dpm).
 
 ## Compromisos del operador
 

@@ -15,7 +15,7 @@ demás se registra con su cadencia escrita en palabras y no lleva sigla. La
 clase no la asigna nadie: la fija el reloj, y se cae sola cuando el reloj deja
 de cumplirse.
 
-→ Sitio canónico: **[datosmexico.org](https://datosmexico.org)**
+→ Página pública del protocolo: **[datosmexico.org/dpm](https://datosmexico.org/dpm)** · Sitio canónico: **[datosmexico.org](https://datosmexico.org)**
 
 ## Navegación
 
