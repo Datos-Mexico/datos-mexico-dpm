@@ -38,7 +38,7 @@ datos quedan fuera de clase y se registran aquí con su cadencia en palabras.
 ## Insignia
 
 - **Insignia viva:** `https://api.datosmexico.org/dpm/v1/insignia/bpm-stream.svg`
-- **Dónde muestra el sistema la insignia del protocolo:** franja inferior del pie del sitio; alternativa: la página de método de la agenda. Por implementar.
+- **Dónde muestra el sistema la insignia del protocolo:** franja inferior del pie de bpm-stream.com (EN PRODUCCIÓN desde el 31-oct-2026, enlaza a datosmexico.org/dpm).
 
 ## Compromisos del operador
 

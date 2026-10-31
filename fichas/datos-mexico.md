@@ -28,7 +28,7 @@
 
 ## Insignia
 
-- **Dónde muestra el sistema la insignia del protocolo:** pie de datosmexico.org y página del protocolo; por implementar. Insignia viva: `https://api.datosmexico.org/dpm/v1/insignia/datos-mexico.svg`
+- **Dónde muestra el sistema la insignia del protocolo:** página pública del protocolo datosmexico.org/dpm (EN PRODUCCIÓN desde el 31-oct-2026, muestra la insignia de cada sistema adherido) y pie de datosmexico.org (PR #175 del sitio, pendiente de merge). Insignia viva: `https://api.datosmexico.org/dpm/v1/insignia/datos-mexico.svg`
 
 ## Compromisos del operador
 
