@@ -1,6 +1,6 @@
 # Protocolo DPM · Datos Por Minuto
 
-**Versión 0.1.0 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
+**Versión 0.2.0 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
 
 ## 0. Qué es este documento
 
@@ -163,8 +163,8 @@ dos veces. El protocolo no cruza identidades entre sistemas.
 - Por cada día: sistema, fecha, número de usuarios distintos que recibieron al
   menos un dato en clase.
 
-La especificación técnica del pulso, su endpoint y su formato de reporte
-corresponden a la versión 0.2 de este protocolo.
+La especificación técnica del pulso, sus rutas, su formato de reporte y el
+cálculo exacto de la clase y de las métricas están en `PULSO.md`.
 
 ---
 
@@ -176,17 +176,18 @@ Un sistema está adherido al protocolo cuando cumple cinco condiciones:
 2. Reporta al pulso sus refrescos y sus usuarios diarios (§7).
 3. Acepta que la clase la fija el reloj y no el operador (§5).
 4. Tiene ficha en `REGISTRO.md`, con la plantilla de `plantillas/`.
-5. Muestra la insignia del protocolo con enlace a este repositorio o a la
-   página del protocolo en datosmexico.org.
+5. Muestra la insignia del protocolo, servida por el pulso, con enlace a este
+   repositorio o a la página del protocolo en datosmexico.org (`INSIGNIA.md`).
 
 La adhesión tiene dos estados:
 
 - **Declarada.** El sistema tiene ficha en el registro y su operador se
   compromete con las cinco condiciones, pero el pulso aún no recibe sus
   reportes. Un sistema con adhesión declarada no aporta cifras públicas.
-- **Verificada.** El pulso recibe reportes del sistema y sus clases se calculan
-  por reloj. Solo los sistemas verificados aportan al caudal y a los usuarios
-  DPM diarios.
+- **Verificada.** El pulso ha recibido al menos un reporte puntual del sistema
+  en cada uno de los últimos siete días y sus clases se calculan por reloj.
+  Solo los sistemas verificados aportan al caudal y a los usuarios DPM diarios.
+  Un sistema que pasa siete días sin reportar vuelve a adhesión declarada.
 
 ---
 
