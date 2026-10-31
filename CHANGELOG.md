@@ -4,6 +4,33 @@ Todas las versiones del protocolo, con fecha y motivo. Versionado semántico;
 hasta la 1.0, cualquier cambio en definiciones, umbrales o reglas de
 degradación incrementa la versión menor.
 
+## 0.3.0 · 2026-10-31
+
+Fuentes por evento y vía de entrega. Motivo: el primer sistema que reporta
+(ReparaCDMX) tiene fuentes que no publican por calendario sino cuando algo
+ocurre, y lleva sus datos a las personas sin que lo pidan; con la 0.2 quedaba
+fuera de clase por construcción aunque refrescara cada 20 segundos.
+
+- `PROTOCOLO.md` §4: dos clases de fuente. La fuente por calendario conserva
+  su periodo como cota. La fuente por evento tiene como reloj la latencia de
+  entrega del evento al sistema: la cota es la peor latencia observada en la
+  ventana, o la declarada si no hubo eventos, corregida al alza por el pulso
+  cuando la realidad la supera.
+- `PROTOCOLO.md` §6: dos vías para llegar a las personas. En la vía de
+  consulta la clase se mide por el periodo entre consultas, como hasta ahora.
+  En la vía de entrega se mide por la peor latencia de extremo a extremo, del
+  evento a la persona, con los mismos umbrales; sin entregas en la ventana el
+  dato queda sin ventana, no fuera de clase. Quien recibe un dato por entrega
+  cuenta como usuario DPM diario.
+- `PULSO.md` §3: catálogo con `fuente_tipo`, `latencia_fuente_ms` y `via`.
+  §4: resumen por minuto con `eventos`, `latencia_fuente_max_ms`, `entregas`
+  y `latencia_entrega_max_ms`; `refrescos` puede ser 0 cuando hubo entregas.
+  §7: cálculo de la clase por vía y cota por tipo de fuente. §11: rechazos
+  nuevos.
+- Compatibilidad: un catálogo sin `fuente_tipo` ni `via` se entiende como
+  fuente por calendario y vía de consulta; nada de lo declarado bajo 0.2
+  cambia de significado.
+
 ## 0.2.1 · 2026-10-31
 
 Aclaraciones de `PULSO.md` surgidas al implementar el pulso en

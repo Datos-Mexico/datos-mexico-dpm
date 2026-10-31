@@ -13,9 +13,13 @@
 ## Datos que el sistema entrega
 
 Los datos de ReparaCDMX nacen por evento (un mensaje, una cita, una oferta),
-no por calendario. El protocolo 0.2 define la cota de la fuente como un
-periodo; para fuentes por evento la regla queda pendiente de la versión 0.3 y
-hasta entonces la columna «Clase» dice *por medir*.
+no por calendario. Desde el protocolo 0.3 se declaran como **fuente por
+evento**: su cota es la latencia de entrega del evento al sistema, que el
+sistema mide y reporta por minuto. Los datos que llegan a las personas por
+WebSocket o en el chat se declaran además por **vía de entrega**. ReparaCDMX
+reporta al pulso desde el 31 de octubre de 2026 (vía de consulta); el reporte
+de latencias está por implementar y hasta entonces la columna «Clase» dice
+*por medir*.
 
 | Dato | Fuente | Reloj de la fuente | Reloj del refresco | Última verificación | Modo (servido · custodiado) | Clase |
 |---|---|---|---|---|---|---|

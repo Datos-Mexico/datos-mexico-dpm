@@ -1,6 +1,6 @@
 # Protocolo DPM · Datos Por Minuto
 
-**Versión 0.2.1 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
+**Versión 0.3.0 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
 
 ## 0. Qué es este documento
 
@@ -94,6 +94,25 @@ minutos no lo convierte en DPS: su clase queda acotada por la fuente. Esta
 regla existe para que la clase describa la frescura real de la observación y
 no la insistencia del sistema.
 
+**Fuentes por calendario y fuentes por evento.** Hay dos clases de fuente y
+el catálogo declara cuál es cada una:
+
+- Una **fuente por calendario** publica observaciones nuevas con un periodo:
+  cada quince minutos, cada mes, cada año. Su reloj es ese periodo y la cota
+  se calcula con él.
+- Una **fuente por evento** produce una observación cuando algo ocurre: un
+  mensaje, una cita, una transacción, la lectura de un sensor. No tiene
+  periodo. Su reloj es la **latencia de entrega**: el tiempo entre el instante
+  en que la observación ocurre en la fuente y el instante en que el sistema la
+  tiene. La cota de una fuente por evento es la peor latencia de entrega
+  observada en la ventana; si en la ventana no hubo eventos, es la latencia
+  declarada en el catálogo, que el pulso corrige al alza cuando la realidad la
+  supera (`PULSO.md` §7).
+
+Una fuente por evento no es una excusa para presumir: un sistema que recibe
+los eventos en segundos pero solo vuelve a mirarlos cada hora sigue estando
+fuera de clase, porque la clase la fija el peor de los dos relojes.
+
 ---
 
 ## 5. La etiqueta se cae sola
@@ -132,6 +151,28 @@ Solo el dato custodiado cuenta para el caudal (§7). El dato servido cuenta
 para la lista de datos en clase y para los usuarios DPM diarios, siempre
 marcado como servido.
 
+**Dos vías para llegar a las personas.** Además del modo, cada dato declara
+por qué vía llega a quien lo recibe, porque la frescura se mide distinto:
+
+- **Vía de consulta.** La persona, o el programa que usa, pide el dato una y
+  otra vez: una pantalla que se refresca, una API que se consulta. El reloj del
+  refresco es el periodo entre consultas consecutivas (§3) y la clase se
+  calcula como en §4 y §5.
+- **Vía de entrega.** El sistema lleva el dato a la persona cuando ocurre algo,
+  sin que ella lo pida: una respuesta en un chat, un aviso, una notificación.
+  Aquí no hay periodo entre refrescos; lo que importa es cuánto tardó cada
+  entrega desde el evento que la originó hasta que llegó a la persona. El
+  reloj del refresco de un dato por entrega es la **peor latencia de entrega**
+  de la ventana, medida de extremo a extremo: del instante del evento en la
+  fuente al instante en que la persona lo tiene. Con esa medida se le aplican
+  los mismos umbrales (§4): DPM si ninguna entrega de la ventana tardó más de
+  60 segundos, DPS si ninguna tardó más de un segundo.
+
+Un dato por entrega sin entregas en la ventana no tiene clase que mostrar:
+queda **sin ventana**, no fuera de clase, porque no hubo nada que entregar.
+Las personas que reciben un dato por entrega cuentan como usuarios DPM
+diarios (§7) igual que las que consultan uno.
+
 ---
 
 ## 7. Métricas públicas y el pulso
@@ -159,7 +200,8 @@ dos veces. El protocolo no cruza identidades entre sistemas.
 **Qué reporta un sistema al pulso.**
 
 - Por cada refresco: sistema, dato, instante del refresco, número de
-  observaciones nuevas, modo (servido o custodiado).
+  observaciones nuevas, modo (servido o custodiado) y, cuando la fuente es por
+  evento o la vía es de entrega, la peor latencia medida en ese minuto.
 - Por cada día: sistema, fecha, número de usuarios distintos que recibieron al
   menos un dato en clase.
 
