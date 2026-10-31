@@ -1,6 +1,6 @@
 # El pulso · especificación técnica
 
-**Protocolo DPM 0.2.1 · 31 de octubre de 2026**
+**Protocolo DPM 0.3.0 · 31 de octubre de 2026**
 
 ## 0. Qué es el pulso
 
@@ -60,8 +60,24 @@ sistema entrega» de la ficha.
 {
   "nombre": "Clima actual de las 32 capitales estatales",
   "fuente": "Open-Meteo",
+  "fuente_tipo": "calendario",
   "reloj_fuente_ms": 900000,
+  "via": "consulta",
   "modo": "servido",
+  "ultima_verificacion": "2026-10-31T18:00:00Z"
+}
+```
+
+Para una fuente por evento entregada a la persona en cuanto ocurre:
+
+```json
+{
+  "nombre": "Respuesta al cliente en WhatsApp",
+  "fuente": "clientes, vía Meta Cloud API",
+  "fuente_tipo": "evento",
+  "latencia_fuente_ms": 5000,
+  "via": "entrega",
+  "modo": "custodiado",
   "ultima_verificacion": "2026-10-31T18:00:00Z"
 }
 ```
@@ -70,7 +86,10 @@ sistema entrega» de la ficha.
 |---|---|---|
 | `nombre` | texto | Como aparece ante las personas. |
 | `fuente` | texto | Quien produce la observación originalmente. |
-| `reloj_fuente_ms` | entero o `null` | Periodo con el que la fuente publica observaciones nuevas, en milisegundos. Es la **cota de la fuente** (`PROTOCOLO.md` §4). Si es `null`, el dato no puede recibir clase. |
+| `fuente_tipo` | `calendario` · `evento` | `PROTOCOLO.md` §4. Por omisión, `calendario`. |
+| `reloj_fuente_ms` | entero o `null` | Solo para fuentes por calendario: periodo con el que la fuente publica observaciones nuevas, en milisegundos. Es la **cota de la fuente** (`PROTOCOLO.md` §4). Si es `null`, el dato no puede recibir clase. |
+| `latencia_fuente_ms` | entero o `null` | Solo para fuentes por evento: latencia de entrega declarada entre el evento en la fuente y el sistema. Es la cota cuando la ventana no tiene eventos; el pulso la corrige al alza cuando observa una mayor (§7). Si es `null`, el dato no puede recibir clase. |
+| `via` | `consulta` · `entrega` | `PROTOCOLO.md` §6. Por omisión, `consulta`. |
 | `modo` | `servido` · `custodiado` | `PROTOCOLO.md` §6. |
 | `ultima_verificacion` | instante ISO 8601 UTC o `null` | Reloj de la verificación. Obligatorio distinto de `null` para datos custodiados que quieran contar en el caudal. |
 
@@ -108,10 +127,19 @@ lo único que la clase necesita: el peor intervalo.
 | Campo | Tipo | Regla |
 |---|---|---|
 | `minuto` | instante ISO 8601 UTC truncado al minuto | Clave del resumen junto con `sistema` y `dato`. |
-| `refrescos` | entero ≥ 1 | Número de refrescos ocurridos dentro del minuto. Un minuto sin refrescos **no se reporta**: la ausencia es el dato. |
+| `refrescos` | entero ≥ 0 | Número de consultas ocurridas dentro del minuto (≥ 1 en la vía de consulta). Un minuto sin refrescos ni entregas **no se reporta**: la ausencia es el dato. |
 | `primero` · `ultimo` | instantes con milisegundos | Instante del primer y del último refresco del minuto. Si `refrescos` es 1, son iguales. |
 | `intervalo_max_ms` | entero ≥ 0 | Mayor intervalo entre refrescos consecutivos **dentro** del minuto. Si `refrescos` es 1, vale 0. |
 | `observaciones` | entero ≥ 0 | Observaciones nuevas que entraron en el minuto. Un refresco que no trajo nada reporta 0 y sigue siendo refresco. |
+| `eventos` | entero ≥ 0, opcional | Fuentes por evento: eventos de la fuente recibidos en el minuto. |
+| `latencia_fuente_max_ms` | entero ≥ 0, obligatorio si `eventos` > 0 | Fuentes por evento: la mayor latencia entre el instante de un evento en la fuente y su recepción en el sistema, de los eventos del minuto. |
+| `entregas` | entero ≥ 0, opcional | Vía de entrega: entregas hechas a personas en el minuto. |
+| `latencia_entrega_max_ms` | entero ≥ 0, obligatorio si `entregas` > 0 | Vía de entrega: la mayor latencia de extremo a extremo, del evento en la fuente a la persona, de las entregas del minuto. |
+
+Un dato por vía de entrega reporta el resumen del minuto **aunque no haya
+tenido consultas**: `refrescos` puede ser 0 cuando hubo entregas, y entonces
+`primero` y `ultimo` son el instante de la primera y la última entrega. Un
+minuto sin consultas ni entregas no se reporta.
 
 Reglas de recepción:
 
@@ -213,10 +241,21 @@ nunca hacia atrás.
    mayor a 60 segundos.
 4. **Clase por reloj.** `W ≤ 1 ms` da DPMS; `W ≤ 1,000 ms` da DPS;
    `W ≤ 60,000 ms` da DPM; mayor, fuera de clase.
-5. **Cota de la fuente.** Se calcula la clase que correspondería a
-   `reloj_fuente_ms` con los mismos umbrales. La clase del dato es la **menos
-   fina** de las dos. Si `reloj_fuente_ms` es `null`, el dato queda fuera de
-   clase.
+   - En la **vía de entrega**, `W` no es el peor hueco entre consultas sino la
+     mayor `latencia_entrega_max_ms` de los resúmenes de la ventana. Si la
+     ventana no tiene entregas, la clase es **sin ventana**. Los pasos 2 y 3 no
+     aplican a esta vía.
+5. **Cota de la fuente.** Se calcula la clase que correspondería al reloj de
+   la fuente con los mismos umbrales y la clase del dato es la **menos fina**
+   de las dos.
+   - Fuente por calendario: el reloj es `reloj_fuente_ms`. Si es `null`, el
+     dato queda fuera de clase.
+   - Fuente por evento: el reloj es la mayor `latencia_fuente_max_ms` de los
+     resúmenes de la ventana; si la ventana no tiene eventos, es
+     `latencia_fuente_ms` del catálogo. Si el catálogo no la declara, el dato
+     queda fuera de clase. Cuando la latencia observada supera a la declarada,
+     el pulso eleva la declarada al valor observado, lo anota en el historial
+     del catálogo y así se queda hasta que el operador la vuelva a declarar.
 6. **Historial.** Si la clase resultante difiere de la vigente, el pulso
    escribe un cambio en el historial del dato con el instante `T`. El historial
    es público y no se edita. Si por una evaluación a demanda dos cálculos caen
@@ -304,6 +343,8 @@ compacta.
 | Dato no declarado en el catálogo | `404` |
 | Resumen con `minuto` futuro, o de más de 24 horas | `422` |
 | `primero` o `ultimo` fuera de su `minuto`, o `ultimo` anterior a `primero` | `422` |
+| `eventos` > 0 sin `latencia_fuente_max_ms`, o `entregas` > 0 sin `latencia_entrega_max_ms` | `422` |
+| `refrescos` = 0 sin `entregas`, o `refrescos` = 0 en un dato por vía de consulta | `422` |
 | Más de 1,000 resúmenes en un envío | `413` |
 | Reporte de usuarios del día en curso, de una fecha futura o de más de 7 días | `422` |
 | Ingesta sobre un dato servido | `422` |
