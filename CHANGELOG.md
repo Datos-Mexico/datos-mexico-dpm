@@ -4,6 +4,18 @@ Todas las versiones del protocolo, con fecha y motivo. Versionado semántico;
 hasta la 1.0, cualquier cambio en definiciones, umbrales o reglas de
 degradación incrementa la versión menor.
 
+## 0.4.1 · 2026-11-01
+
+Dos precisiones surgidas de la primera auditoría (ReparaCDMX,
+`auditorias/2026-11-01-reparacdmx.md`); ninguna cambia una clase ya publicada.
+
+- `PULSO.md` §4: los eventos de una fuente por evento se atribuyen al minuto
+  en que el sistema los recibió, no al del origen. Agrupar por el origen dejaba
+  fuera a los eventos que llegan tarde, justo los de latencia alta.
+- `PULSO.md` §7.5: una redeclaración no puede bajar la latencia de la fuente
+  por debajo de la peor observada en los últimos siete días. Un catálogo que se
+  redeclara a diario deshacía la elevación que hizo el pulso.
+
 ## 0.4.0 · 2026-10-31
 
 Comprobación: qué pasa si un sistema miente. Motivo: el pulso juzgaba solo

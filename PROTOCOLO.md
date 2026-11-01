@@ -1,6 +1,6 @@
 # Protocolo DPM · Datos Por Minuto
 
-**Versión 0.4.0 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
+**Versión 0.4.1 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
 
 ## 0. Qué es este documento
 

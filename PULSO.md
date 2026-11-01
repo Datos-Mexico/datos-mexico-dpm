@@ -1,6 +1,6 @@
 # El pulso · especificación técnica
 
-**Protocolo DPM 0.4.0 · 31 de octubre de 2026**
+**Protocolo DPM 0.4.1 · 1 de noviembre de 2026**
 
 ## 0. Qué es el pulso
 
@@ -132,7 +132,7 @@ lo único que la clase necesita: el peor intervalo.
 | `primero` · `ultimo` | instantes con milisegundos | Instante del primer y del último refresco del minuto. Si `refrescos` es 1, son iguales. |
 | `intervalo_max_ms` | entero ≥ 0 | Mayor intervalo entre refrescos consecutivos **dentro** del minuto. Si `refrescos` es 1, vale 0. |
 | `observaciones` | entero ≥ 0 | Observaciones nuevas que entraron en el minuto. Un refresco que no trajo nada reporta 0 y sigue siendo refresco. |
-| `eventos` | entero ≥ 0, opcional | Fuentes por evento: eventos de la fuente recibidos en el minuto. |
+| `eventos` | entero ≥ 0, opcional | Fuentes por evento: eventos de la fuente **recibidos por el sistema** en el minuto (se atribuyen al minuto de recepción, no al del origen; así un evento que llega tarde se reporta cuando llega y con su latencia completa). |
 | `latencia_fuente_max_ms` | entero ≥ 0, obligatorio si `eventos` > 0 | Fuentes por evento: la mayor latencia entre el instante de un evento en la fuente y su recepción en el sistema, de los eventos del minuto. |
 | `entregas` | entero ≥ 0, opcional | Vía de entrega: entregas hechas a personas en el minuto. |
 | `latencia_entrega_max_ms` | entero ≥ 0, obligatorio si `entregas` > 0 | Vía de entrega: la mayor latencia de extremo a extremo, del evento en la fuente a la persona, de las entregas del minuto. |
@@ -255,8 +255,10 @@ nunca hacia atrás.
      resúmenes de la ventana; si la ventana no tiene eventos, es
      `latencia_fuente_ms` del catálogo. Si el catálogo no la declara, el dato
      queda fuera de clase. Cuando la latencia observada supera a la declarada,
-     el pulso eleva la declarada al valor observado, lo anota en el historial
-     del catálogo y así se queda hasta que el operador la vuelva a declarar.
+     el pulso eleva la declarada al valor observado y lo anota en el historial
+     del catálogo. Una redeclaración del operador **no puede bajarla** por
+     debajo de la peor latencia observada en los últimos siete días: el pulso
+     la corrige al recibirla y lo anota.
 6. **Historial.** Si la clase resultante difiere de la vigente, el pulso
    escribe un cambio en el historial del dato con el instante `T`. El historial
    es público y no se edita. Si por una evaluación a demanda dos cálculos caen
