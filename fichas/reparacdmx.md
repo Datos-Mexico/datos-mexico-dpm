@@ -23,7 +23,7 @@ de latencias está por implementar y hasta entonces la columna «Clase» dice
 
 | Dato | Fuente | Reloj de la fuente | Reloj del refresco | Última verificación | Modo (servido · custodiado) | Clase |
 |---|---|---|---|---|---|---|
-| Bandeja de mensajes de clientes (consola) | clientes, vía Meta Cloud API | por evento; entrega en segundos | WebSocket en vivo con vigilante de 45 segundos; consulta de respaldo cada 20 segundos | firma HMAC e idempotencia en cada entrada | custodiado | por medir |
+| Bandeja de mensajes de clientes (consola) | clientes, vía Meta Cloud API | por evento; entrega en segundos | **refresco de servidor cada 30 segundos** (desde el 1-nov-2026, decisión del operador: el propio sistema consulta la bandeja aunque nadie tenga la consola abierta) más WebSocket en vivo y consulta de respaldo cada 20 segundos cuando hay consola | firma HMAC e idempotencia en cada entrada | custodiado | por medir |
 | Conversación abierta (consola) | clientes, vía Meta Cloud API | por evento | WebSocket; consulta de respaldo cada 15 segundos | ídem | custodiado | por medir |
 | Despacho y ofertas a técnicos | el sistema y los técnicos | por evento | cada 20 segundos (despacho y compuerta de ofertas); cada 30 segundos (ofertas en la app) | ídem | custodiado | por medir |
 | Reportes de servicio | técnicos | por evento | cada 60 segundos | ídem | custodiado | por medir |
