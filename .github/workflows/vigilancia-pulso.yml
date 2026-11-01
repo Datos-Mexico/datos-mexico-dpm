@@ -1,0 +1,32 @@
+# Vigilancia externa del pulso del Protocolo DPM: cada diez minutos, desde fuera de Cloudflare, comprueba que el pulso responda
+# y que haya evaluado clases hace menos de doce minutos. Si falla, abre un issue con la etiqueta «vigilancia» (y avisa por
+# correo a quien vigile el repositorio); cuando se recupera, lo cierra. Costo: cero (repositorio público).
+name: Vigilancia del pulso
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  contents: read
+
+concurrency:
+  group: vigilancia-pulso
+  cancel-in-progress: false
+
+jobs:
+  vigilar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Comprobar el pulso
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node tools/vigilancia.mjs

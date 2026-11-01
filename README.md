@@ -25,11 +25,15 @@ de cumplirse.
 - **[Pulso](PULSO.md)** — la especificación técnica: catálogo, resumen por
   minuto, ingestas, usuarios, cálculo de clase y de métricas, lecturas públicas.
 - **[Insignia](INSIGNIA.md)** — la insignia viva que sirve el pulso.
+- **[Guía de adhesión](GUIA-ADHESION.md)** — de cero a reportar en una tarde, con
+  ejemplos en Node y Python en `ejemplos/`.
 - **[Registro](REGISTRO.md)** — los sistemas adheridos, su estado y sus datos
   en clase.
 - **[Fichas](fichas/)** — una ficha por sistema adherido.
 - **[Plantillas](plantillas/)** — la ficha de adhesión para un sistema nuevo.
 - **[¿Tiene México un dato por segundo?](docs/fuentes-por-minuto.md)** — investigación abierta: lo medido y lo pendiente.
+- **Vigilancia** — `tools/vigilancia.mjs` corre cada diez minutos desde GitHub Actions y
+  abre un issue «vigilancia» si el pulso deja de evaluar.
 - **[Changelog](CHANGELOG.md)** — todas las versiones del protocolo, con fecha
   y motivo.
 
