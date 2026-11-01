@@ -2,7 +2,7 @@
 
 [![Sitio: datosmexico.org](https://img.shields.io/badge/sitio-datosmexico.org-111111)](https://datosmexico.org)
 [![Licencia: CC BY 4.0](https://img.shields.io/badge/licencia-CC%20BY%204.0-lightgrey)](LICENSE)
-[![Protocolo: 0.1.0](https://img.shields.io/badge/protocolo-0.4.0-blue)](CHANGELOG.md)
+[![Protocolo: 0.1.0](https://img.shields.io/badge/protocolo-0.4.1-blue)](CHANGELOG.md)
 [![Sistemas adheridos: 4 declarados · 0 verificados](https://img.shields.io/badge/sistemas%20adheridos-4%20declarados%20%C2%B7%200%20verificados-lightgrey)](REGISTRO.md)
 
 Sede del **Protocolo DPM · Datos Por Minuto** del Observatorio Datos México:
@@ -39,7 +39,7 @@ de cumplirse.
 
 ## Estado
 
-Versión 0.4.0, formalizada el 31 de octubre de 2026. Cuatro sistemas con
+Versión 0.4.1, formalizada el 31 de octubre de 2026. Cuatro sistemas con
 adhesión declarada y ninguno verificado. El pulso está en producción en la API del
 Observatorio ([api.datosmexico.org/dpm/v1/estado](https://api.datosmexico.org/dpm/v1/estado),
 documentación en [api.datosmexico.org/docs](https://api.datosmexico.org/docs), etiqueta `dpm`)
