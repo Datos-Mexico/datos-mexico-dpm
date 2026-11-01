@@ -57,3 +57,7 @@ de latencias está por implementar y hasta entonces la columna «Clase» dice
 - [x] no enuncia en público cifras del protocolo que el pulso no haya producido.
 
 Firma del operador: David Fernando Ávila Díaz · 2026-10-31
+
+## Auditorías
+
+- [001 · 1 de noviembre de 2026](../auditorias/2026-11-01-reparacdmx.md): 10 de 10 minutos iguales entre pulso y sistema; 37 de 37 respuestas al cliente recalculadas desde mensajes; dos hallazgos corregidos el mismo día (eventos por minuto de recepción; latencia de la fuente medida de verdad).
