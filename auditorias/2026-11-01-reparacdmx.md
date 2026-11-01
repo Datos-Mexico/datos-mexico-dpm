@@ -71,3 +71,15 @@ del protocolo, con peor intervalo de 34.5 segundos en la ventana.
 1. Conservar una bitácora muestral de consultas (una de cada cien, sin identificadores) para futuras auditorías de la vía de
    consulta, a costo despreciable.
 2. Repetir esta auditoría a la semana, cuando el sistema sea verificable, y publicarla aquí como 002.
+
+## Respuesta del sistema (1 de noviembre de 2026, mismo día)
+
+El operador midió con el instante de recepción: Meta → recepción, mediana 5 s, p90 9 s, máximo 47 s (40 mensajes);
+recepción → procesado, mediana 8 s, máximo 10 s. Encontró que cada respuesta del asistente esperaba 120 segundos por diseño,
+una ventana de intervención humana que ya no cumplía su función: el cliente recibía la respuesta a los 142 s de mediana y
+268 s en p90. Publicó un tope de 40 s por llamada al asistente, una fila por cliente en el consumidor de la cola, una línea
+diaria con ambas latencias en su reporte nocturno, y una prueba controlada (una cuarta parte de los clientes a 30 s, el resto a
+120 s, dos semanas o más). Sobre los cinco casos de más de un minuto del 31 de octubre: dos audios (transcripción de hasta
+45 s), dos ráfagas del mismo cliente y uno de 129 s consistente con un reintento de cola, sin registros para confirmarlo.
+El observatorio toma nota: la prueba se verá en el pulso como latencias cercanas a 140 s y el dato seguirá fuera de clase
+mientras dure, por decisión del operador; la ficha lo declara.

@@ -32,6 +32,18 @@ de latencias está por implementar y hasta entonces la columna «Clase» dice
 | Ubicación de técnicos | GPS del dispositivo | continuo | latido cada 15 minutos; revisión cada 60 segundos; presencia cada 5 minutos | sin verificación externa | custodiado | fuera de clase |
 | Finanzas (Meta Ads, cobros, tipo de cambio, consumo de proveedores) | Meta Ads, buzón de cobros, proveedores | diaria u horaria según la fuente | cada hora; dos veces al día; una vez al día | conciliación en el propio módulo | custodiado | fuera de clase |
 
+## Nota sobre la respuesta al cliente (1 de noviembre de 2026)
+
+La latencia del dato `respuesta-cliente` se mide de extremo a extremo, del mensaje del cliente a la salida de la respuesta,
+y así lo decidió el operador. El propio sistema, al revisar sus tiempos tras la auditoría 001, encontró que cada respuesta
+del asistente esperaba **120 segundos por diseño** (una ventana para que una persona pudiera frenarla desde la consola): el
+asistente tarda unos 8 segundos y el resto era espera deliberada. Desde el 1 de noviembre el sistema corre una prueba
+controlada: una cuarta parte de los clientes recibe la respuesta a los 30 segundos y el resto sigue a 120, durante al menos
+dos semanas, para medir el efecto en citas. Mientras dure, el dato mostrará latencias cercanas a 140 segundos y quedará
+**fuera de clase**: es una decisión de negocio en medición, no una falla, y el pulso la mostrará tal cual. Medido con el
+instante de recepción (desde la auditoría): Meta → recepción, mediana 5 s, p90 9 s, máximo 47 s; recepción → procesado,
+mediana 8 s, máximo 10 s.
+
 ## Usuarios
 
 - **Cómo cuenta el sistema a sus usuarios distintos por día:** contactos distintos con actividad en el día en la tabla de eventos de analítica y en la de mensajes; técnicos y operadores distintos por presencia en la app y en la consola. Conteos sin identificar a nadie.
