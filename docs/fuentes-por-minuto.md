@@ -8,7 +8,10 @@ fuente no hay dato que custodiar. Este documento registra lo medido y lo pendien
 
 | Fuente | Qué publica | Cadencia real | Cómo se supo | Consecuencia DPM |
 |---|---|---|---|---|
-| Open-Meteo (clima de las 32 capitales) | estado actual y pronóstico | cada 15 minutos | cada respuesta declara `current.interval = 900` | fuente por calendario de 900 s; el dato `datos-mexico/clima-capitales` queda fuera de clase aunque se refresque cada 5 minutos |
+| Open-Meteo (clima de las 32 capitales) | estado actual y pronóstico de modelo | cada 15 minutos | cada respuesta declara `current.interval = 900` | fuente por calendario de 900 s; el dato `datos-mexico/clima-capitales` (pronóstico, no medición) queda fuera de clase aunque se refresque cada 5 minutos |
+| SMN, CONAGUA (estaciones meteorológicas automáticas, EMAs) | lecturas cada 10 minutos de 730 estaciones | **ninguna**: medido el 9 de noviembre de 2026, el portal marca las 730 estaciones en error y sus reportes de 24 h, semana y 90 días vienen vacíos | consultas directas a los servicios del portal y vista en navegador | no hay fuente pública de 10 minutos; una sonda diaria lo vigila |
+| SMN, CONAGUA (red sinóptica, WIS2 de la OMM) | observación horaria de unos 75 observatorios con personal, en BUFR | cada hora; el lote se publica unos 11 minutos después de la hora (medido el 9 de noviembre de 2026); algunas estaciones llegan tarde | suscripción a los brokers globales de WIS2 y lectura de sus cachés por HTTP | fuente por calendario de 3,600 s: la medición oficial del clima (`datos-mexico/clima-estaciones`) queda fuera de clase por la fuente |
+| SENEAM (METAR de aeropuertos, vía aviationweather.gov de NOAA) | reporte horario (minuto 40) y especiales | horaria; NOAA lo tiene unos 16 minutos después de la observación (mediana medida el 9 de noviembre de 2026) | campo `receiptTime` de cada reporte | fuera de clase; el observatorio lo usa solo como testigo de la medición |
 | SSN, UNAM (últimos sismos, canal RSS) | cada sismo con su hora de origen | por evento; **medido del 1 al 9 de noviembre de 2026 (275 sismos)**: el canal publica cada sismo entre 12 minutos y 10 horas después de ocurrir; mediana 4 h 27 min, p90 6 h 43 min, mínimo 11 min 40 s | sonda del observatorio: lectura por minuto, instante de origen contra primer instante visto | el canal público del SSN es de sismos ya revisados: no es una fuente por segundo ni por minuto; el dato `datos-mexico/sismos-ssn` queda fuera de clase y la sonda sigue midiendo |
 | CENACE (demanda real del sistema eléctrico) | página HTML | no declarada | la página no dice cada cuánto se actualiza | pendiente: localizar el punto de datos que alimenta la página y medir |
 | SINAICA, INECC (calidad del aire) | lecturas por estación | horaria por diseño | naturaleza de la red | fuera de clase por cota de la fuente |
@@ -20,8 +23,10 @@ fuente no hay dato que custodiar. Este documento registra lo medido y lo pendien
 - La candidata por evento, los sismos del SSN, **ya tiene número**: su canal público publica cada sismo con horas de retraso
   (mediana 4 h 27 min; el más rápido tardó casi 12 minutos). Es un canal de sismos revisados, no de alerta. No es una fuente
   por segundo ni por minuto.
-- Mientras tanto, el observatorio reporta sus dos datos vivos (clima y sismos) con sus cotas reales, y ambos quedan fuera de
-  clase. Eso no es una falla del protocolo: es la fotografía honesta de las fuentes públicas del país.
+- El clima tampoco: la red de 10 minutos de CONAGUA no publica, y lo oficial vivo (la red sinóptica del SMN) es horario.
+- Mientras tanto, el observatorio reporta sus datos vivos (clima y sismos) con sus cotas reales, y quedan fuera de clase. Eso no
+  es una falla del protocolo: es la fotografía honesta de las fuentes públicas del país. Donde sí cabe una clase fina es en lo
+  que hace el propio observatorio: la entrega en vivo (`datos-mexico/clima-entrega`), que se mide y se presenta aparte.
 
 ## Pendientes
 
