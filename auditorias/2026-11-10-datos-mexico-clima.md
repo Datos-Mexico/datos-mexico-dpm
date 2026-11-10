@@ -56,7 +56,7 @@ prueba de independencia.
 ## Corrección
 
 - Sistema: la cara pública de la entrega cuenta solo minutos cerrados hace más de dos minutos, que ya están reportados
-  (`src/clima/envivo.ts`). Preparada el mismo día; se aplica con el visto bueno del responsable del sistema y se anotará aquí
+  (`src/clima/envivo.ts`, PR #16 de la API). Preparada el mismo día; se aplica con el visto bueno del responsable del sistema y se anotará aquí
   la hora en que quedó en producción.
 - Sistema: la portada se conecta a la entrega en vivo (hallazgo 2), en preparación.
 
