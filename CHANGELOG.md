@@ -4,6 +4,23 @@ Todas las versiones del protocolo, con fecha y motivo. Versionado semántico;
 hasta la 1.0, cualquier cambio en definiciones, umbrales o reglas de
 degradación incrementa la versión menor.
 
+## 0.5.0 · 2026-11-10
+
+La clase de un dato por entrega ya no depende de que alguien esté mirando en
+este momento. Motivo: con poco público, el dato `datos-mexico/clima-entrega`
+pasó 16 horas del 10 de noviembre «sin ventana» aunque entregaba en menos de un
+segundo (auditoría 002); el nombre del protocolo no debe sugerir que un sistema
+dejó de estar vivo solo porque nadie lo veía.
+
+- `PROTOCOLO.md` §6 y `PULSO.md` §7.4: un dato por entrega sin entregas en la
+  hora vigente conserva la clase de su hora más reciente con entregas de las
+  últimas 24 horas; la ficha publica esa hora (`ventana`, `vigente: false`).
+  Sin entregas en 24 horas, sin ventana. La clase sigue saliendo solo de
+  entregas reales a personas, con la misma ventana de 60 minutos y los mismos
+  umbrales; no cambia ninguna clase calculada con entregas en la hora vigente.
+- Ficha del dato y historial de clases: campo nuevo `ventana` (desde, hasta,
+  vigente) y `ventana_hasta` en cada cambio de clase.
+
 ## 0.4.1 · 2026-11-01
 
 Dos precisiones surgidas de la primera auditoría (ReparaCDMX,
