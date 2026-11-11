@@ -1,6 +1,6 @@
 # El pulso · especificación técnica
 
-**Protocolo DPM 0.4.1 · 1 de noviembre de 2026**
+**Protocolo DPM 0.5.0 · 10 de noviembre de 2026**
 
 ## 0. Qué es el pulso
 
@@ -244,8 +244,12 @@ nunca hacia atrás.
    `W ≤ 60,000 ms` da DPM; mayor, fuera de clase.
    - En la **vía de entrega**, `W` no es el peor hueco entre consultas sino la
      mayor `latencia_entrega_max_ms` de los resúmenes de la ventana. Si la
-     ventana no tiene entregas, la clase es **sin ventana**. Los pasos 2 y 3 no
-     aplican a esta vía.
+     ventana no tiene entregas, se mide la hora más reciente que sí las tuvo:
+     los 60 minutos que terminan con el último minuto con entregas, siempre que
+     ese minuto esté en las 24 horas anteriores a `T`; la ficha publica esa hora
+     (`ventana`, con `vigente: false`). Si en esas 24 horas no hubo entregas, la
+     clase es **sin ventana**. Los pasos 2 y 3 no aplican a esta vía; el paso 5
+     usa los resúmenes de la hora medida.
 5. **Cota de la fuente.** Se calcula la clase que correspondería al reloj de
    la fuente con los mismos umbrales y la clase del dato es la **menos fina**
    de las dos.
@@ -330,7 +334,7 @@ Todas las lecturas son públicas, en JSON, con caché de 60 segundos.
 |---|---|
 | `GET /dpm/v1/estado` | Versión del protocolo, sistemas con su estado, datos con clase vigente y desde cuándo, los dos caudales con su ventana, usuarios DPM diarios del último día completo, instante de cálculo. |
 | `GET /dpm/v1/sistemas/{sistema}` | Ficha legible por máquina, estado de adhesión e historial de estados. |
-| `GET /dpm/v1/datos/{sistema}/{dato}` | Catálogo vigente, clase vigente, `W` de la última evaluación y los tres relojes. |
+| `GET /dpm/v1/datos/{sistema}/{dato}` | Catálogo vigente, clase vigente, `W` de la última evaluación, los tres relojes y la hora sobre la que se calculó la clase (`ventana`: desde, hasta y si es la vigente). |
 | `GET /dpm/v1/datos/{sistema}/{dato}/historial` | Cambios de clase, con instante. |
 | `GET /dpm/v1/datos/{sistema}/{dato}/comprobaciones` | Historial de comprobaciones de cara pública: instante, resultado y lo que se leyó. |
 | `GET /dpm/v1/usuarios?desde=&hasta=` | Usuarios DPM diarios por fecha y por sistema. |

@@ -1,6 +1,6 @@
 # Protocolo DPM · Datos Por Minuto
 
-**Versión 0.4.1 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
+**Versión 0.5.0 · formalizado el 31 de octubre de 2026 · Observatorio Datos México**
 
 ## 0. Qué es este documento
 
@@ -168,8 +168,12 @@ por qué vía llega a quien lo recibe, porque la frescura se mide distinto:
   los mismos umbrales (§4): DPM si ninguna entrega de la ventana tardó más de
   60 segundos, DPS si ninguna tardó más de un segundo.
 
-Un dato por entrega sin entregas en la ventana no tiene clase que mostrar:
-queda **sin ventana**, no fuera de clase, porque no hubo nada que entregar.
+Un dato por entrega sin entregas en la ventana conserva la clase de su hora
+más reciente con entregas, si fue en las últimas 24 horas, y la ficha dice de
+qué hora es. Sin nadie a quien entregar no hay nada que envejezca: la clase
+sigue saliendo de entregas reales a personas, solo que no de las de esta hora.
+Si en 24 horas no hubo ninguna entrega, el dato queda **sin ventana**, no fuera
+de clase, porque no hubo nada que entregar.
 Las personas que reciben un dato por entrega cuentan como usuarios DPM
 diarios (§7) igual que las que consultan uno.
 
