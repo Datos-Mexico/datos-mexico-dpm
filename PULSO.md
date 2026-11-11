@@ -1,6 +1,6 @@
 # El pulso · especificación técnica
 
-**Protocolo DPM 0.5.0 · 10 de noviembre de 2026**
+**Protocolo DPM 0.6.0 · 11 de noviembre de 2026**
 
 ## 0. Qué es el pulso
 
@@ -245,11 +245,12 @@ nunca hacia atrás.
    - En la **vía de entrega**, `W` no es el peor hueco entre consultas sino la
      mayor `latencia_entrega_max_ms` de los resúmenes de la ventana. Si la
      ventana no tiene entregas, se mide la hora más reciente que sí las tuvo:
-     los 60 minutos que terminan con el último minuto con entregas, siempre que
-     ese minuto esté en las 24 horas anteriores a `T`; la ficha publica esa hora
-     (`ventana`, con `vigente: false`). Si en esas 24 horas no hubo entregas, la
-     clase es **sin ventana**. Los pasos 2 y 3 no aplican a esta vía; el paso 5
-     usa los resúmenes de la hora medida.
+     los 60 minutos que terminan con el último minuto con entregas, sin límite
+     de antigüedad; la ficha publica esa hora (`ventana`, con `vigente: false`).
+     La clase así sostenida sigue sujeta a la comprobación de cara pública
+     (§7 bis): tres fallas seguidas la sacan de clase. Si el dato nunca tuvo
+     entregas, la clase es **sin ventana**. Los pasos 2 y 3 no aplican a esta
+     vía; el paso 5 usa los resúmenes de la hora medida.
 5. **Cota de la fuente.** Se calcula la clase que correspondería al reloj de
    la fuente con los mismos umbrales y la clase del dato es la **menos fina**
    de las dos.

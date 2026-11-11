@@ -4,6 +4,21 @@ Todas las versiones del protocolo, con fecha y motivo. Versionado semántico;
 hasta la 1.0, cualquier cambio en definiciones, umbrales o reglas de
 degradación incrementa la versión menor.
 
+## 0.6.0 · 2026-11-11
+
+Un dato por entrega estable se ve estable aunque nadie lo esté usando. Motivo
+(decisión del responsable del observatorio): con la 0.5.0, un día sin visitas
+devolvía el dato a «sin ventana» y el protocolo sugería un sistema intermitente
+cuando nada había cambiado.
+
+- `PROTOCOLO.md` §6 y `PULSO.md` §7.4: la hora más reciente con entregas se usa
+  sin límite de antigüedad (antes, 24 horas). La clase cae en cuanto una entrega
+  llega tarde, y la sostiene que el sistema siga vivo: tres comprobaciones de
+  cara pública seguidas fallidas la sacan de clase (§8 bis, sin cambios). Solo
+  un dato que nunca ha entregado nada queda sin ventana.
+- No cambia ninguna clase calculada con entregas en la hora vigente ni el
+  historial ya publicado: el protocolo nunca corrige hacia atrás.
+
 ## 0.5.0 · 2026-11-10
 
 La clase de un dato por entrega ya no depende de que alguien esté mirando en
