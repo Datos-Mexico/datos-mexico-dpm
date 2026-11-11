@@ -1,6 +1,6 @@
 # ¿Tiene México un dato público que llegue en segundos?
 
-**Investigación abierta del Protocolo DPM · 31 de octubre de 2026, actualizada el 9 de noviembre.** El protocolo presume tres clases: por minuto, por
+**Investigación abierta del Protocolo DPM · 31 de octubre de 2026, actualizada el 11 de noviembre.** El protocolo presume tres clases: por minuto, por
 segundo y por milisegundo. La pregunta operativa es si alguna fuente pública mexicana publica con esa cadencia, porque sin
 fuente no hay dato que custodiar. Este documento registra lo medido y lo pendiente; se actualiza con cada medida nueva.
 
@@ -14,7 +14,8 @@ fuente no hay dato que custodiar. Este documento registra lo medido y lo pendien
 | SENEAM (METAR de aeropuertos, vía aviationweather.gov de NOAA) | reporte horario (minuto 40) y especiales | horaria; NOAA lo tiene unos 16 minutos después de la observación (mediana medida el 9 de noviembre de 2026) | campo `receiptTime` de cada reporte | fuera de clase; el observatorio lo usa solo como testigo de la medición |
 | SSN, UNAM (últimos sismos, canal RSS) | cada sismo con su hora de origen | por evento; **medido del 1 al 9 de noviembre de 2026 (275 sismos)**: el canal publica cada sismo entre 12 minutos y 10 horas después de ocurrir; mediana 4 h 27 min, p90 6 h 43 min, mínimo 11 min 40 s | sonda del observatorio: lectura por minuto, instante de origen contra primer instante visto | el canal público del SSN es de sismos ya revisados: no es una fuente por segundo ni por minuto; el dato `datos-mexico/sismos-ssn` queda fuera de clase y la sonda sigue midiendo |
 | CENACE (demanda real del sistema eléctrico) | página HTML | no declarada | la página no dice cada cuánto se actualiza | pendiente: localizar el punto de datos que alimenta la página y medir |
-| SINAICA, INECC (calidad del aire) | lecturas por estación | horaria por diseño | naturaleza de la red | fuera de clase por cota de la fuente |
+| SINAICA, INECC (calidad del aire) | concentración horaria por estación y contaminante, preliminar y sin validar | horaria; **medido el 10–11 de noviembre de 2026**: la mayoría de las redes envía a los :10 de la hora, la de la Ciudad de México a los :31; algunas redes van horas atrás (Monterrey ~3.5 h, Mérida ~4 h esa noche); 11 de las 32 capitales sin estación con envíos | rutas públicas sin sesión (`getUltimosEnvios`, página de estación con 48 h) y marca de tiempo de cada envío | fuera de clase por cota de la fuente; el observatorio la custodia cada hora y calcula el índice de la NOM-172 (coincide con el publicado por SINAICA en 9 de 9 capitales comparables) |
+| SMN, CONAGUA (pronóstico por municipio, servicio web) | pronóstico diario a 4 días y horario a 116 h de ~2,460 municipios | **una emisión al día, medido el 10–11 de noviembre de 2026**: la corrida de las 00 UTC se publica a las 12:30 UTC (unas 12.5 h después); el sitio dice «cada hora 15 minutos», pero el contenido cambia una vez al día | marca de tiempo de la cabecera gzip de cada archivo | fuente diaria, fuera de clase; el observatorio guarda cada emisión para medir su acierto contra la medición oficial |
 | Banxico, SIE (tipo de cambio FIX) | un valor por día hábil | diaria | publicación oficial | fuera de clase |
 
 ## Lo que se concluye por ahora
